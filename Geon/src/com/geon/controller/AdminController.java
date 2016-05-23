@@ -13,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.geon.domain.User;
+import com.geon.repository.LoginDb;
 import com.geon.repository.Userlist;
+import com.geon.service.RandomPassword;
+import com.geon.service.SendMail;
 
 public class AdminController extends HttpServlet {
 
@@ -46,18 +49,14 @@ public class AdminController extends HttpServlet {
 				String email = request.getParameter("email");
 				user = db.getUserById(email);
 				request.setAttribute("user", user);
-			} else if(action.equalsIgnoreCase("delete"))
-			{
+			} else if (action.equalsIgnoreCase("delete")) {
 				forward = ADMIN;
 				String Email = request.getParameter("email");
 				db.deleteUser(Email);
 				request.setAttribute("users", db.getAllRecords());
-			}
-			else 
-			{
+			} else {
 				forward = INSERT;
-				
-				
+
 			}
 
 		} catch (Exception e) {
@@ -111,23 +110,26 @@ public class AdminController extends HttpServlet {
 		String Education = request.getParameter("education");
 		u.setEducation(Education);
 		System.out.println(Education);
-		
+
 		String forward = "";
-		if(Email==null || Email.isEmpty())
-		{
+		if (Email == null || Email.isEmpty()) {
 			try {
-				
+
 				db.updateUser(u);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else 
-		{
+		} else {
 			try {
-				
+
 				db.addUser(u);
-				
+
+				SendMail s = new SendMail();
+				RandomPassword rp = new RandomPassword();
+				String password = rp.getPassword();
+				s.Sendto(Email, password);
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -141,6 +143,5 @@ public class AdminController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-	
 
 }

@@ -33,7 +33,7 @@
 					<td><c:out value="${user.experience}" /></td>
 					<td><c:out value="${user.education}" /></td>
 					<td align="center">
-					<a href="/Geon/AdminController?action=">ADD</a>
+					
 					<a href="/Geon/AdminController?action=edit&email=<c:out value="${user.email}"/>">Edit</a>
 					<a href="/Geon/AdminController?action=delete&email=<c:out value="${user.email}"/>"><button onclick="myFunction()">Delete</button></a>	
 					
@@ -41,6 +41,7 @@
 			</c:forEach>
 		</table>
 	</c:if>
+	<a href="/Geon/AdminController?action=">ADD</a>
 	<script>
 function myFunction() {
     var x;

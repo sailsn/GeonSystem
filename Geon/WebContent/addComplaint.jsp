@@ -72,13 +72,11 @@ div {
 			document.getElementById("ticketNum").value = ticketNumber;
 
 			var assigneesElement = document.getElementById('assigneesList');
-			
-			var assignees = "${assignees}";
-		var array = assignees.split(',');
-			console.log(assignees);
-			//var array = JSON.parse(a);
-			// array = JSON.stringify(assignees);
 
+			var assignees = "${assignees}";
+			var array = assignees.split(',');
+
+			console.log(assignees);
 
 			for (var i = 0; i < array.length; i++) {
 				var myOption = document.createElement("option");
@@ -86,7 +84,6 @@ div {
 				myOption.text = array[i];
 				assigneesElement.add(myOption);
 			}
-			
 		</script>
 	</div>
 
