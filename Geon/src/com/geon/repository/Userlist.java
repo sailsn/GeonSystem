@@ -7,9 +7,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import com.geon.config.DbUtil;
 
@@ -133,4 +142,41 @@ public class Userlist {
 		preparedstatement.executeUpdate();
 		
 	}
+	
+	/*public void Send(String email,String FirstName)
+			throws AddressException, MessagingException {
+
+		String from = "testingtheis@gmail.com";
+		String password = "lsnworks";
+		String host = "smtp.gmail.com";
+
+		Properties properties = System.getProperties();
+		properties.put("mail.smtp.port", "587");
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+
+		// SmtpAuthenticator authentication = new SmtpAuthenticator();
+
+		Session session = Session.getDefaultInstance(properties);
+
+		MimeMessage message = new MimeMessage(session);
+		message.setFrom(new InternetAddress(from));
+		message.addRecipient(Message.RecipientType.TO, new InternetAddress(ForwardEmail));
+		message.setSubject("TICKET REFERENCE NUMBER");
+		message.setText("Take this Ticket RefNumber then give the support for this complaint");
+
+		String Emailbody = "Hi " + FirstName + ",<br>Thank you for Registered in Geon <br>To get Started using Geon <br>One of our agents will be in touch with you shortly. <br> You can track your Order transaction status here:<p><a href='http://localhost:8080/Geon/AdminController?action=display&TicketRefNumber="
+				+ ticketRefNumber + "'>Click here to activate your Account</a></p> <br> Thanks & Regards,<br><b>D.V.SAIKUMAR</b>   ";
+		message.setContent(Emailbody, "text/html");
+
+		Transport transport = session.getTransport("smtp");
+
+		transport.connect(host, from, password);
+
+		transport.sendMessage(message, message.getAllRecipients());
+
+		transport.close();
+	}
+	
+*/
 }

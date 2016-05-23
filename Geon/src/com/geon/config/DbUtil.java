@@ -15,7 +15,7 @@ public class DbUtil {
 	public static Connection getConnection() throws IOException, ClassNotFoundException, SQLException {
 		try {
 			Properties prop = new Properties();
-			File file = new File("D:\\Practice4\\Geon\\src\\db.properties");
+			File file = new File("D:\\Supportportal\\Geon\\src\\db.properties");
 			FileInputStream inputstream = new FileInputStream(file);
 			prop.load(inputstream);
 			String driver = prop.getProperty("driver");

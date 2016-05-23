@@ -3,6 +3,8 @@ package com.geon.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.geon.domain.Person;
+import com.geon.domain.User;
 import com.geon.repository.UserDao;
+import com.geon.repository.Userlist;
 
 //contains the Servlets
 public class UserController extends HttpServlet {
@@ -20,6 +24,7 @@ public class UserController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private UserDao dao;
+	private Userlist db;
 
 	// private static String FORWARD_USER = "/user.jsp";
 	private static String RESOLVED = "/resolved.jsp";
@@ -31,6 +36,7 @@ public class UserController extends HttpServlet {
 	public UserController() throws ClassNotFoundException, SQLException, IOException {
 		super();
 		dao = new UserDao();
+		db = new Userlist();
 
 	}
 
@@ -51,7 +57,7 @@ public class UserController extends HttpServlet {
 			// request.setAttribute("user", user);
 			// }
 			else if (action.equalsIgnoreCase("complaintlist")) {// LIST OF
-															// COMPLAINTS
+				// COMPLAINTS
 
 				forward = LIST_USER;
 				request.setAttribute("complaints", dao.complaints());
@@ -66,6 +72,20 @@ public class UserController extends HttpServlet {
 
 				forward = INSERT_OR_EDIT;
 				int nextNumber = dao.getRecords();
+				List<User> allUsers = db.getAllRecords();
+
+				List<String> s = new ArrayList<String>();
+				for (User u : allUsers) {
+					String FirstName = u.getFirstName();
+					String LastName = u.getLastName();
+					s.add(FirstName);
+//					FirstName = FirstName.concat( u.getLastName());
+//					System.out.println(FirstName);
+//					s.add(FirstName);
+					System.out.println(s);
+					
+				}
+				request.setAttribute("assignees", s);
 				request.setAttribute("TicketRefNumber", nextNumber);
 			} else if (action.equalsIgnoreCase("display")) {
 				forward = DISPLAY;
@@ -76,8 +96,7 @@ public class UserController extends HttpServlet {
 				a.add(user);
 
 				request.setAttribute("users", a);
-
-			} 
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

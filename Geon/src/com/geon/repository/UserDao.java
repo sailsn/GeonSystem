@@ -236,6 +236,8 @@ public class UserDao {
 		return users;
 
 	}
+	
+	
 
 	public int getRecords() throws SQLException {
 		List<Person> users = new ArrayList<Person>();

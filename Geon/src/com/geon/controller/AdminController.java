@@ -25,6 +25,7 @@ public class AdminController extends HttpServlet {
 	private Userlist db;
 	private static String ADMIN = "/usersList.jsp";
 	private static String EDIT = "/editUser.jsp";
+	private static String INSERT = "/addUser.jsp";
 
 	public AdminController() throws ClassNotFoundException, IOException, SQLException {
 		super();
@@ -52,6 +53,12 @@ public class AdminController extends HttpServlet {
 				db.deleteUser(Email);
 				request.setAttribute("users", db.getAllRecords());
 			}
+			else 
+			{
+				forward = INSERT;
+				
+				
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,7 +67,7 @@ public class AdminController extends HttpServlet {
 		view.forward(request, response);
 	}
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response) {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		User u = new User();
 
@@ -105,10 +112,12 @@ public class AdminController extends HttpServlet {
 		u.setEducation(Education);
 		System.out.println(Education);
 		
+		String forward = "";
 		if(Email==null || Email.isEmpty())
 		{
 			try {
-				db.addUser(u);
+				
+				db.updateUser(u);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -116,15 +125,22 @@ public class AdminController extends HttpServlet {
 		}else 
 		{
 			try {
-				db.updateUser(u);
+				
+				db.addUser(u);
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
-		
-
+		RequestDispatcher view = request.getRequestDispatcher(ADMIN);
+		try {
+			request.setAttribute("users", db.getAllRecords());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
 
 }

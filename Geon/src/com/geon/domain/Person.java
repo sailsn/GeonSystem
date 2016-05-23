@@ -19,6 +19,7 @@ public class Person {
 	private String forwardedEmail;
 	private String remarks;
 	private String customerName;
+	private String assignee;
 	public String getStatus() {
 		return status;
 	}
@@ -113,7 +114,7 @@ public class Person {
 				+ companyName + ", Email=" + email + ", PhoneNumber=" + phoneNumber + ",WarrantyStatus="
 				+ warrantyStatus + ",SupportCategory=" + supportCategory + ",Severity=" + severity
 				+ ",IssueDescription=" + issueDescription + ",ForwardedEmail=" + forwardedEmail + ",Remarks=" + remarks
-				+ ",]";
+				+ "]" ;
 	}
 
 	public String getCompanyName() {
@@ -123,5 +124,15 @@ public class Person {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+
+	public String getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(String assignee) {
+		this.assignee = assignee;
+	}
+
+	
 }
 
