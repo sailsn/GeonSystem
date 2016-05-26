@@ -122,6 +122,8 @@ public class UserController extends HttpServlet {
 			user.setSupportCategory(request.getParameter("SupportCategory"));
 			user.setWarrantyStatus(request.getParameter("status"));
 			user.setPhoneNumber(Integer.parseInt(request.getParameter("PhoneNumber")));
+			String Assignee = request.getParameter("assignee");
+			user.setAssignee(Assignee);
 			String TicketRefNumber = request.getParameter("TicketRefNumber");
 			if (TicketRefNumber == null || TicketRefNumber.isEmpty()) {
 				user.setTicketRefNumber(Integer.parseInt(TicketRefNumber));

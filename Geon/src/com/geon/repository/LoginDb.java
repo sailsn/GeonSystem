@@ -31,11 +31,11 @@ public class LoginDb {
 
 			l.setEmail(rs.getString("email"));
 
-			System.out.println(rs.getString("email"));
+			//System.out.println(rs.getString("email"));
 			l.setPassword(rs.getString("password"));
-			System.out.println(password);
+			//System.out.println(password);
 			l.setRole(rs.getString("role"));
-			System.out.println("role");
+			//System.out.println("role");
 
 		}
 		return l;

@@ -44,7 +44,7 @@ public class UserDao {
 			 * user.getForwardedEmail() + "','" + user.getRemarks() + "','" +
 			 * user.getPhoneNumber() + "','" + user.getTicketRefNumber() + "'";
 			 */
-			String strQry = "INSERT INTO `complaintregistration`(`CustomerName`, `Severity`, `CompanyName`, `Email`, `Warrantystatus`, `SupportCategory`, `IssueDescription`, `ForwardedEmail`, `Remarks`, `PhoneNumber`, `TicketRefNumber`, `status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+			String strQry = "INSERT INTO `complaintregistration`(`CustomerName`, `Severity`, `CompanyName`, `Email`, `Warrantystatus`, `SupportCategory`, `IssueDescription`, `ForwardedEmail`, `Remarks`, `PhoneNumber`, `TicketRefNumber`, `status`,`assignee`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			PreparedStatement preparedstatement = connection.prepareStatement(strQry);
 			preparedstatement.setString(1, user.getCustomerName());
@@ -59,6 +59,7 @@ public class UserDao {
 			preparedstatement.setInt(10, user.getPhoneNumber());
 			preparedstatement.setLong(11, user.getTicketRefNumber());
 			preparedstatement.setString(12, "new");
+			preparedstatement.setString(13, user.getAssignee());
 			preparedstatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -236,6 +237,14 @@ public class UserDao {
 		return users;
 
 	}
+//	public List<Person> userComplaints() throws SQLException
+//	{
+//		List<Person> userComp = new ArrayList<Person>();
+//		
+//		Statement stmt = connection.createStatement();
+//		
+//		String userComplaintQuery = "SELECT * FROM `complaintregistration` WHERE `assignee`= 'Shiva'";
+//	}
 	
 	
 

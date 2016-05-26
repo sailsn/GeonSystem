@@ -30,6 +30,7 @@ public class LoginController extends HttpServlet {
 		Login l = new Login();
 		String forward = "";
 		try {
+			//String FirstName = request.getParameter("");
 			String Email = request.getParameter("email");
 			System.out.println(Email);
 			l.setEmail(Email);
@@ -38,19 +39,20 @@ public class LoginController extends HttpServlet {
 			System.out.println(Password);
 			l.setPassword(Password);
 
-			ldb.handle(Email, Password);
+			l=ldb.handle(Email, Password);
 			
 			String Role = l.getRole();
 			
 			if (Role != null ) {
 
 				System.out.println("Admin");
-				request.setAttribute("home", ldb.handle(Email, Password));
+				request.setAttribute("home", l);
 				forward = HOME;
 
 			} else {
 				System.out.println("User");
 				request.setAttribute("home", ldb.userHandle(l));
+				
 				forward = HOME;
 			}
 
