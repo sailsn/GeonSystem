@@ -237,14 +237,47 @@ public class UserDao {
 		return users;
 
 	}
-//	public List<Person> userComplaints() throws SQLException
-//	{
-//		List<Person> userComp = new ArrayList<Person>();
-//		
-//		Statement stmt = connection.createStatement();
-//		
-//		String userComplaintQuery = "SELECT * FROM `complaintregistration` WHERE `assignee`= 'Shiva'";
-//	}
+	public List<Person> userComplaints(String assignee) throws SQLException
+	{
+		List<Person> userComp = new ArrayList<Person>();
+		try{
+		
+		Statement stmt = connection.createStatement();
+		
+		String userComplaintQuery = "SELECT * FROM `complaintregistration` WHERE `assignee`= '" + assignee + "'";
+		ResultSet rs =	stmt.executeQuery(userComplaintQuery);
+		
+		while (rs.next()) {
+			Person user = new Person();
+			user.setCompanyName(rs.getString("CompanyName"));
+			System.out.println(rs.getString("CompanyName"));
+			user.setCustomerName(rs.getString("CustomerName"));
+			System.out.println(rs.getString("CustomerName"));
+			user.setEmail(rs.getString("Email"));
+			System.out.println(rs.getString("Email"));
+			user.setForwardedEmail(rs.getString("ForwardedEmail"));
+			System.out.println(rs.getString("ForwardedEmail"));
+			user.setIssueDescription(rs.getString("IssueDescription"));
+			System.out.println(rs.getString("IssueDescription"));
+			user.setPhoneNumber(rs.getInt("PhoneNumber"));
+			System.out.println(rs.getInt("PhoneNumber"));
+			user.setRemarks(rs.getString("Remarks"));
+			System.out.println(rs.getString("Remarks"));
+			user.setSeverity(rs.getString("Severity"));
+			System.out.println(rs.getString("Severity"));
+			user.setSupportCategory(rs.getString("SupportCategory"));
+			System.out.println(rs.getString("SupportCategory"));
+			user.setTicketRefNumber(rs.getInt("TicketRefNumber"));
+			user.setWarrantyStatus(rs.getString("Warrantystatus"));
+			user.setAssignee(rs.getString("assignee"));
+			userComp.add(user);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+		return userComp;
+		
+	}
 	
 	
 

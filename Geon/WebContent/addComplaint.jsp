@@ -74,7 +74,10 @@ div {
 			var assigneesElement = document.getElementById('assigneesList');
 
 			var assignees = "${assignees}";
-			var array = assignees.split(',');
+			
+			a = assignees.replace("[","").replace("]","");
+			
+			var array = a.split(',');
 
 			console.log(assignees);
 

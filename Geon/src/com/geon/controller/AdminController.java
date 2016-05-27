@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,8 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.geon.domain.Login;
+import com.geon.domain.Person;
 import com.geon.domain.User;
 import com.geon.repository.LoginDb;
+import com.geon.repository.UserDao;
 import com.geon.repository.Userlist;
 import com.geon.service.RandomPassword;
 import com.geon.service.SendMail;
@@ -26,6 +30,8 @@ public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private Userlist db;
+	private LoginDb ldb;
+	private UserDao dao;
 	private static String ADMIN = "/usersList.jsp";
 	private static String EDIT = "/editUser.jsp";
 	private static String INSERT = "/addUser.jsp";
@@ -33,6 +39,8 @@ public class AdminController extends HttpServlet {
 	public AdminController() throws ClassNotFoundException, IOException, SQLException {
 		super();
 		db = new Userlist();
+		ldb = new LoginDb();
+		dao = new UserDao();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -69,7 +77,7 @@ public class AdminController extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		User u = new User();
-
+		Login l = new Login();
 		String FirstName = request.getParameter("firstName");
 		u.setFirstName(FirstName);
 
@@ -78,6 +86,7 @@ public class AdminController extends HttpServlet {
 
 		String Email = request.getParameter("email");
 		u.setEmail(Email);
+		l.setEmail(Email);
 
 		try {
 			String dobString = request.getParameter("joiningDate");
@@ -128,13 +137,16 @@ public class AdminController extends HttpServlet {
 				SendMail s = new SendMail();
 				RandomPassword rp = new RandomPassword();
 				String password = rp.getPassword();
+				l.setPassword(password);
 				s.Sendto(Email, password);
+				ldb.userHandle(l);
 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
 		RequestDispatcher view = request.getRequestDispatcher(ADMIN);
 		try {
 			request.setAttribute("users", db.getAllRecords());

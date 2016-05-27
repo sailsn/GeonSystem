@@ -71,6 +71,8 @@ public class Userlist {
 
 		return user;
 	}
+	
+	
 
 	public List<User> getAllRecords() throws SQLException {
 
