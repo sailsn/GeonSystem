@@ -19,5 +19,7 @@
 	<classpathentry kind="lib" path="C:/Users/LSN-CMQ001/Desktop/jars/New folder/standard.jar"/>
 	<classpathentry kind="lib" path="C:/Users/LSN-CMQ001/Desktop/jars/Mail jars/activation.jar"/>
 	<classpathentry kind="lib" path="C:/Users/LSN-CMQ001/Desktop/jars/Mail jars/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LSN-CMQ001/Downloads/jfreechart-1.0.19/lib/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/LSN-CMQ001/Downloads/jfreechart-1.0.19/lib/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

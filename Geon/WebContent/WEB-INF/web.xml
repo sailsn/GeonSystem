@@ -33,6 +33,16 @@
   <url-pattern>/LoginController</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  <servlet-name>PieChartServlet</servlet-name>
+  <servlet-class>com.geon.controller.PieChartController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>PieChartServlet</servlet-name>
+  <url-pattern>/PieChartController</url-pattern>
+  </servlet-mapping>
+  
+  
   
   
 </web-app>

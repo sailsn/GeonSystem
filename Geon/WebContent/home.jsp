@@ -33,6 +33,7 @@ li a:hover {
   <li><a class="active" href="/Geon/UserController?action=complaintlist">ComplaintRegistration</a></li>
   <li><a href="/Geon/UserController?action=resolved">Resolved</a></li>
   <li><a href="/Geon/AdminController?action=userslist">Admin</a></li>
+  <li><a href="/Geon/PieChartController">PieChart</a></li>
 
 </ul>
 

@@ -44,7 +44,7 @@
 	<a href="/Geon/AdminController?action=">ADD</a>
 	<script>
 function myFunction() {
-    var x;
+    var x = "${user.email}";
     if (confirm("Are you sure want to delete!") == true) {
         x = "You pressed OK!";
     } else {
